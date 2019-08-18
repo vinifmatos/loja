@@ -12,6 +12,6 @@ class HomeController < ApplicationController
   end
 
   def get_promocoes
-    @promocoes = Promocao.all.ativas.includes(:produto).order(created_at: :desc).limit(6)
+    @promocoes = params[:categoria].present? ? Promocao.where(categoria_id: params[:categoria]).ativas.includes(:produto).order(created_at: :desc).limit(6) : Promocao.ativas.includes(:produto).order(created_at: :desc).limit(6)
   end
 end

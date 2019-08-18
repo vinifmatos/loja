@@ -1,0 +1,8 @@
+<!-- Page Content -->
+<div class="container">
+  <% @produtos.each do |produto| %>
+    <div class="row">
+      <%= link_to produto.nome, admin_produto_path(produto) %>
+    </div>
+  <% end %>
+</div>

@@ -8,7 +8,7 @@
       <h1 class="my-4">Shop Name</h1>
       <div class="list-group">
         <% @categorias.each do |categoria| %>
-          <%= link_to categoria.nome, produtos_path, class: 'list-group-item' %>
+          <%= link_to categoria.nome, produtos_path(categoria: categoria.id), class: 'list-group-item' %>
         <% end %>
       </div>
     </div>

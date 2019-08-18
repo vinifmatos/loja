@@ -12,9 +12,17 @@
  *
  */
 
- @import "bootstrap";
+@import "bootstrap";
+@import "font_awesome5_webfont";
 
- body {
+html, body {
+  height: 100%;
+}
+body {
     padding-top: 56px;
-  }
-  
+    display: flex;
+    flex-direction: column;
+}
+.main-container {
+  flex: 1;
+}
