@@ -7,9 +7,8 @@
 //= require ../cable
 //= require Chart.bundle.min
 
-(function ($) {
+$(document).on("turbolinks:load", function () {
   "use strict"; // Start of use strict
-
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
     $("body").toggleClass("sidebar-toggled");
@@ -54,5 +53,4 @@
     }, 1000, 'easeInOutExpo');
     e.preventDefault();
   });
-
-})(jQuery); // End of use strict
+}); // End of use strict

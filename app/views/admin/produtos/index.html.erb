@@ -1,8 +1,6 @@
 <!-- Page Content -->
 <div class="container">
-  <% @produtos.each do |produto| %>
-    <div class="row">
-      <%= link_to produto.nome, admin_produto_path(produto) %>
-    </div>
-  <% end %>
+  <div class="row">
+    <%= render 'admin/partials/grid_produtos', produtos: @produtos %>
+  </div>
 </div>

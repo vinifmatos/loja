@@ -1,0 +1,6 @@
+<div class="list-group">
+  <%= link_to t('promocoes'), produtos_path(categoria: 'promocoes'), class: 'list-group-item' %>
+  <% categorias.each do |categoria| %>
+    <%= link_to categoria.nome, produtos_path(categoria: categoria.id), class: 'list-group-item' %>
+  <% end %>
+</div>

@@ -1,7 +1,6 @@
-class Admin::ProdutosController < ApplicationController
+class Admin::ProdutosController < Admin::AdminController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
   before_action :set_categorias, only: [:new, :edit, :create, :update]
-  layout 'admin'
 
   # GET /produtos
   # GET /produtos.json

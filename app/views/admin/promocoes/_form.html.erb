@@ -1,4 +1,4 @@
-<%= form_with(model: promocao, local: true) do |form| %>
+<%= form_with(model: [:admin, promocao], local: true) do |form| %>
   <% if promocao.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(promocao.errors.count, "error") %> prohibited this promocao from being saved:</h2>

@@ -5,7 +5,16 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = params[:categoria].present? ? Produto.where(categoria_id: params[:categoria]) : Produto.all
+    if params[:categoria].present?
+      if params[:categoria] == 'promocoes'
+        @promocoes = Promocao.ativas.includes(:produto).order(created_at: :desc)
+        render :promocoes
+      else
+        @produtos = Produto.where(categoria_id: params[:categoria])
+      end
+    else
+      @produtos = Produto.all
+    end
   end
 
   # GET /produtos/1
@@ -25,6 +34,6 @@ class ProdutosController < ApplicationController
     end
 
     def set_categorias
-    @categorias = Categoria.all.select(:id, :nome)
-  end
+      @categorias = Categoria.all.select(:id, :nome)
+    end
 end

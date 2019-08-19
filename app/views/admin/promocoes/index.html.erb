@@ -1,0 +1,8 @@
+<!-- Page Content -->
+<div class="container">
+  <% @promocoes.each do |promocao| %>
+    <div class="row">
+      <%= link_to promocao.produto.nome, admin_promocao_path(promocao) %>
+    </div>
+  <% end %>
+</div>
