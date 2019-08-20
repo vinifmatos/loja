@@ -70,7 +70,7 @@ class Admin::ProdutosController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produto_params
-      params.require(:produto).permit(:nome, :descricao, :preco)
+      params.require(:produto).permit(:nome, :descricao, :preco, imagens: [] )
     end
 
     def set_categorias

@@ -1,19 +1,54 @@
-<p id="notice"><%= notice %></p>
+<%= link_to t('.acoes.editar'), edit_admin_produto_path(@produto), class: 'btn btn-primary mr-1' %>
+<%= link_to t('.acoes.voltar'), admin_produtos_path, class: 'btn btn-primary' %>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @produto.nome %>
-</p>
+<div class="card mt-3">
+  <div class="card-header">
+    Informações do produto
+  </div>
+  <div class="card-body">
+    <p>
+      <strong><%= "#{@produto.class.human_attribute_name :nome}:" %></strong>
+      <br>
+      <%= @produto.nome %>
+    </p>
 
-<p>
-  <strong>Descricao:</strong>
-  <%= @produto.descricao %>
-</p>
+    <p>
+      <strong><%= "#{@produto.class.human_attribute_name :descricao}:" %></strong>
+      <br>
+      <%= @produto.descricao %>
+    </p>
 
-<p>
-  <strong>Preco:</strong>
-  <%= @produto.preco %>
-</p>
-
-<%= link_to 'Edit', edit_admin_produto_path(@produto) %> |
-<%= link_to 'Back', admin_produtos_path %>
+    <p>
+      <strong><%= "#{@produto.class.human_attribute_name :preco}:" %></strong>
+      <br>
+      <%= number_to_human @produto.preco, significant: false %>
+    </p>
+  </div>
+  <div class="card-header">
+    Imagens
+  </div>
+  <div class="card-body d-flex justify-content-center">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <% @produto.imagens.each do |imagem| %>
+          <div class="carousel-item <%= 'active' if @produto.imagens.index(imagem) == 0 %>">
+            <%= image_tag imagem.url, class: 'd-block', size: '700x400', alt: '' %>
+          </div>
+        <% end %>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>

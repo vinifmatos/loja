@@ -11,22 +11,38 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :nome %>
-    <%= form.text_field :nome %>
+    <%= form.text_field :nome, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :descricao %>
-    <%= form.text_area :descricao %>
+    <%= form.text_area :descricao, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :preco %>
-    <%= form.number_field :preco %>
+    <%= form.number_field :preco, min: 0, step: 0.01, class: 'form-control' %>
+  </div>
+
+  <div class="">
+    <%= form.label :imagens %>
+    <br>
+    <div class="row no-gutters">
+      <% produto.imagens.each do |imagem| %>
+        <%= hidden_field :produto, :imgens, multiple: true, value: imagem.identifier, id: "produto_imagem_#{imagem.identifier}" %>
+        <div class="img-container" id="<%= "container#{imagem.identifier}" %>">
+          <%= image_tag imagem.url, size: '210x120', alt: '', id: imagem.identifier, class: 'img-form-produto' %>
+          <%= button_tag t('acoes.remover'), class: 'btn btn-danger btn-sm btn-rmimg', id: "bt#{imagem.identifier}", type: :button %>
+        </div>
+      <% end %>
+    </div>
+    <%= form.file_field :imagens, multiple: true %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit t('acoes.salvar'), class: 'btn btn-primary' %>
+    <%= link_to t('acoes.cancelar'), :back, class: 'btn btn-primary' %>
   </div>
 <% end %>

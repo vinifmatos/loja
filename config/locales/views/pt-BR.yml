@@ -1,2 +1,9 @@
 pt-BR:
   promocoes: Promoções
+  acoes:
+    novo: Novo
+    editar: Editar
+    excluir: Excluir
+    voltar: Voltar
+    salvar: Salvar
+    cancelar: Cancelar

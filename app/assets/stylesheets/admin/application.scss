@@ -12049,3 +12049,25 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+div#content {
+  background-color: #fff
+}
+
+.btn-rmimg {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.img-form-produto:hover + .btn-rmimg {
+  display:inline-block;
+}
+
+.img-container {
+    position: relative;
+}
