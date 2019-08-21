@@ -29,7 +29,7 @@
   <div class="">
     <%= form.label :imagens %>
     <br>
-    <div class="row no-gutters">
+    <div class="row no-gutters" id="container-imagens">
       <% produto.imagens.each do |imagem| %>
         <%= hidden_field :produto, :imgens, multiple: true, value: imagem.identifier, id: "produto_imagem_#{imagem.identifier}" %>
         <div class="img-container" id="<%= "container#{imagem.identifier}" %>">
@@ -38,7 +38,12 @@
         </div>
       <% end %>
     </div>
+    <div class='mt-2'>
+      <%= button_tag t('acoes.adicionar'), class: 'btn btn-primary', id: "btAddImagem", type: :button %>
+    </div>
+    <div class='mt-2' id="fileInputs">
     <%= form.file_field :imagens, multiple: true %>
+    </div>
   </div>
 
   <div class="actions">
@@ -46,3 +51,47 @@
     <%= link_to t('acoes.cancelar'), :back, class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  function preview () {
+    $('input[type="file"]').change(function(e){
+        var input = e.target.id;        
+        Array.from(e.target.files).forEach(file => {
+        cont_prev = "containerPrev" + input;
+        cont_prev_id = "#" + cont_prev
+        $("#container-imagens").append('<div class="img-container" id="' + cont_prev + '"></div>');
+        $(cont_prev_id).append('<button name="button" type="button" class="btn btn-danger btn-sm btn-rmimg" id="btPrev' + input +'">Remover</button>');
+        $(cont_prev_id).prepend("<img class=\"img-form-produto prev\" src=\"\" width=\"210\" height=\"120\" id=\"prev" + input+ "\">");
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          img_base64 = e.target.result;
+          prev = "#prev" + input;
+          $(prev).attr("src", img_base64);
+        };
+        reader.readAsDataURL(file);
+      });
+      removeImagem();
+    });
+  }
+
+  function removeImagem () {
+    $('.btn-rmimg').click(function (e) {
+      var input = "#" + this.id.replace("btPrev", "");
+      $(input).remove();
+      $(this).closest('.img-container').remove();
+    });
+  }
+
+  $(document).on("turbolinks:load", function(){
+    removeImagem();
+
+    $("#btAddImagem").click(function (){
+      var count = $('input[type="file"]').length + 1;
+      var id = "produto_imagens" + count;
+      var html = '<input multiple="multiple" type="file" name="produto[imagens][]" id="' + id + '">';
+      $("#fileInputs").append(html)
+      preview();
+      $("#" + id).click()
+    });
+  });
+</script>
