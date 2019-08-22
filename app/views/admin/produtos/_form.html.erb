@@ -26,72 +26,50 @@
     <%= form.number_field :preco, min: 0, step: 0.01, class: 'form-control' %>
   </div>
 
-  <div class="">
-    <%= form.label :imagens %>
-    <br>
-    <div class="row no-gutters" id="container-imagens">
-      <% produto.imagens.each do |imagem| %>
-        <%= hidden_field :produto, :imgens, multiple: true, value: imagem.identifier, id: "produto_imagem_#{imagem.identifier}" %>
-        <div class="img-container" id="<%= "container#{imagem.identifier}" %>">
-          <%= image_tag imagem.url, size: '210x120', alt: '', id: imagem.identifier, class: 'img-form-produto' %>
-          <%= button_tag t('acoes.remover'), class: 'btn btn-danger btn-sm btn-rmimg', id: "bt#{imagem.identifier}", type: :button %>
-        </div>
-      <% end %>
+  <div class="card">
+    <div class="card-header">
+      Imagens
     </div>
-    <div class='mt-2'>
-      <%= button_tag t('acoes.adicionar'), class: 'btn btn-primary', id: "btAddImagem", type: :button %>
-    </div>
-    <div class='mt-2' id="fileInputs">
-    <%= form.file_field :imagens, multiple: true %>
-    </div>
+    <div class="card-body">
+      <div id="imagens" class="row no-gutters">
+        <%= form.fields_for :imagens do |imagem| %>
+          <%= render 'imagem_fields', f: imagem %>
+        <% end %>
+      </div>
+      <%= link_to_add_association fa_icon('plus'), form, :imagens, class: 'btn btn-success' %>
+  </div>
   </div>
 
-  <div class="actions">
+  <div class="actions mt-3">
     <%= form.submit t('acoes.salvar'), class: 'btn btn-primary' %>
-    <%= link_to t('acoes.cancelar'), :back, class: 'btn btn-primary' %>
+    <%= link_to t('acoes.cancelar'), action_name == 'edit' ? admin_produto_path(produto) : admin_produtos_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
 
 <script type="text/javascript">
   function preview () {
     $('input[type="file"]').change(function(e){
-        var input = e.target.id;        
-        Array.from(e.target.files).forEach(file => {
-        cont_prev = "containerPrev" + input;
-        cont_prev_id = "#" + cont_prev
-        $("#container-imagens").append('<div class="img-container" id="' + cont_prev + '"></div>');
-        $(cont_prev_id).append('<button name="button" type="button" class="btn btn-danger btn-sm btn-rmimg" id="btPrev' + input +'">Remover</button>');
-        $(cont_prev_id).prepend("<img class=\"img-form-produto prev\" src=\"\" width=\"210\" height=\"120\" id=\"prev" + input+ "\">");
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          img_base64 = e.target.result;
-          prev = "#prev" + input;
-          $(prev).attr("src", img_base64);
-        };
-        reader.readAsDataURL(file);
-      });
-      removeImagem();
+      var input = e.target;
+      var file = e.target.files[0];
+      var prev = $(input).parents(".nested-fields").find(".img-form-produto");
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        img_base64 = e.target.result;
+        $(prev).attr("src", img_base64);
+      };
+      reader.readAsDataURL(file);
     });
   }
 
-  function removeImagem () {
-    $('.btn-rmimg').click(function (e) {
-      var input = "#" + this.id.replace("btPrev", "");
-      $(input).remove();
-      $(this).closest('.img-container').remove();
-    });
-  }
+  function cocoon_insertion_method() {
+    $(".add_fields").data("association-insertion-method", 'append').data("association-insertion-node", '#imagens');
+  };
 
   $(document).on("turbolinks:load", function(){
-    removeImagem();
-
-    $("#btAddImagem").click(function (){
-      var count = $('input[type="file"]').length + 1;
-      var id = "produto_imagens" + count;
-      var html = '<input multiple="multiple" type="file" name="produto[imagens][]" id="' + id + '">';
-      $("#fileInputs").append(html)
+    preview();
+    cocoon_insertion_method();
+    $("#imagens").on("cocoon:after-insert", function (){
       preview();
-      $("#" + id).click()
     });
   });
 </script>

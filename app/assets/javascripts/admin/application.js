@@ -6,6 +6,7 @@
 //= require turbolinks
 //= require ../cable
 //= require Chart.bundle.min
+//= require cocoon
 
 $(document).on("turbolinks:load", function () {
   "use strict"; // Start of use strict

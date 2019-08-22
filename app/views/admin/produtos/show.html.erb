@@ -37,7 +37,7 @@
       <div class="carousel-inner">
         <% @produto.imagens.each do |imagem| %>
           <div class="carousel-item <%= 'active' if @produto.imagens.index(imagem) == 0 %>">
-            <%= image_tag imagem.url, class: 'd-block', size: '700x400', alt: '' %>
+            <%= image_tag imagem.imagem.url, class: 'd-block', size: '700x400', alt: '' %>
           </div>
         <% end %>
       </div>

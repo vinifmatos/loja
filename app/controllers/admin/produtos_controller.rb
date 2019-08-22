@@ -16,6 +16,7 @@ class Admin::ProdutosController < Admin::AdminController
   # GET /produtos/new
   def new
     @produto = Produto.new
+    @imagem = @produto.imagens.build
   end
 
   # GET /produtos/1/edit
@@ -70,7 +71,7 @@ class Admin::ProdutosController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produto_params
-      params.require(:produto).permit(:nome, :descricao, :preco, imagens: [] )
+      params.require(:produto).permit(:nome, :descricao, :preco, imagens_attributes: [:id, :imagem, :_destroy] )
     end
 
     def set_categorias

@@ -1,0 +1,18 @@
+<div class="nested-fields mb-3">
+  <div class="row no-gutters mr-3">
+    <div>
+      <div class="img-container" style="width: 210px; heigth: 120px;">
+        <%= image_tag f.object.imagem.url, size: '210x120', alt: '', class: 'img-form-produto' %>
+        <%= link_to_remove_association fa_icon('trash'), f, class: 'btn btn-danger btn-sm btn-rmimg' %>
+      </div>
+      <div style="<%= 'display: none;' unless f.object.id.nil? %>">
+        <div class="input-group">
+          <div class="custom-file">
+            <%= f.file_field :imagem, class: 'custom-file-input p-0' %>
+            <%= f.label :imagem, 'Selecione uma imagem', class: 'custom-file-label' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
