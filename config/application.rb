@@ -37,5 +37,7 @@ module Loja
                        helper_specs: false,
                        routing_specs: false
     end
+    config.time_zone = 'America/Sao_Paulo'
+    config.active_record.default_timezone = :local
   end
 end

@@ -7,6 +7,9 @@
 //= require ../cable
 //= require Chart.bundle.min
 //= require cocoon
+//= require moment
+//= require moment/pt-br
+//= require tempusdominus-bootstrap-4.js
 
 $(document).on("turbolinks:load", function () {
   "use strict"; // Start of use strict

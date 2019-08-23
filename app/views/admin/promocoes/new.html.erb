@@ -1,5 +1,2 @@
-<h1>New Promocao</h1>
-
+<h1><%= t 'acoes.nova', model: @promocao.class.model_name %></h1>
 <%= render 'form', promocao: @promocao %>
-
-<%= link_to 'Back', admin_promocoes_path %>

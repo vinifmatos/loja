@@ -1,24 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Produto:</strong>
-  <%= @promocao.produto %>
-</p>
+<%= link_to t('.acoes.editar'), edit_admin_promocao_path(@promocao), class: 'btn btn-primary mr-1' %>
+<%= link_to t('.acoes.voltar'), admin_promocoes_path, class: 'btn btn-primary' %>
 
-<p>
-  <strong>Preco:</strong>
-  <%= @promocao.preco %>
-</p>
+<div class="card mt-3">
+  <div class="card-header">
+    Informações da promoção
+  </div>
+  <div class="card-body">
+    <p>
+      <strong><%= "#{@promocao.class.human_attribute_name :produto}:" %></strong>
+      <%= @promocao.produto.nome %>
+    </p>
 
-<p>
-  <strong>Preco:</strong>
-  <%= @promocao.preco %>
-</p>
+    <p>
+      <strong><%= "#{@promocao.class.human_attribute_name :desconto}:" %></strong>
+      <%= number_to_human @promocao.desconto, significant: false %>
+    </p>
 
-<p>
-  <strong>Validade:</strong>
-  <%= @promocao.validade %>
-</p>
-
-<%= link_to 'Edit', edit_admin_promocao_path(@promocao) %> |
-<%= link_to 'Back', admin_promocoes_path %>
+    <p>
+      <strong><%= "#{@promocao.class.human_attribute_name :validade}:" %></strong>
+      <%= l @promocao.validade, format: :long %>
+    </p>
+  </div>
+</div>

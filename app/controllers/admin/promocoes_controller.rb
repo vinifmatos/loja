@@ -4,7 +4,7 @@ class Admin::PromocoesController < Admin::AdminController
   # GET /promocoes
   # GET /promocoes.json
   def index
-    @promocoes = Promocao.all
+    @promocoes = Promocao.all.includes(produto: :imagens)
   end
 
   # GET /promocoes/1
@@ -28,8 +28,8 @@ class Admin::PromocoesController < Admin::AdminController
 
     respond_to do |format|
       if @promocao.save
-        format.html { redirect_to @promocao, notice: 'Promocao was successfully created.' }
-        format.json { render :show, status: :created, location: @promocao }
+        format.html { redirect_to [:admin, @promocao], notice: 'Promocao was successfully created.' }
+        format.json { render :show, status: :created, location: [:admin, @promocao] }
       else
         format.html { render :new }
         format.json { render json: @promocao.errors, status: :unprocessable_entity }
@@ -42,8 +42,8 @@ class Admin::PromocoesController < Admin::AdminController
   def update
     respond_to do |format|
       if @promocao.update(promocao_params)
-        format.html { redirect_to @promocao, notice: 'Promocao was successfully updated.' }
-        format.json { render :show, status: :ok, location: @promocao }
+        format.html { redirect_to [:admin, @promocao], notice: 'Promocao was successfully updated.' }
+        format.json { render :show, status: :ok, location: [:admin, @promocao] }
       else
         format.html { render :edit }
         format.json { render json: @promocao.errors, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class Admin::PromocoesController < Admin::AdminController
   def destroy
     @promocao.destroy
     respond_to do |format|
-      format.html { redirect_to promocoes_url, notice: 'Promocao was successfully destroyed.' }
+      format.html { redirect_to admin_promocoes_url, notice: 'Promocao was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

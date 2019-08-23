@@ -11,27 +11,55 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :produto_id %>
-    <%= form.text_field :produto_id %>
+    <%= form.text_field :produto_id, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :preco %>
-    <%= form.text_field :preco %>
+  <div class="form-group">
+    <%= form.label :desconto %>
+    <%= form.number_field :desconto, min: 0, step: 0.01, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :preco %>
-    <%= form.text_field :preco %>
-  </div>
-
-  <div class="field">
+  <div class="form-group" style="width: 200px">
     <%= form.label :validade %>
-    <%= form.datetime_select :validade %>
+    <div class="input-group date" id="datetimepicker" data-target-input="#promocao_validade">
+      <%= form.text_field :validade, value: l((form.object.validade || Time.now), format: '%d/%m/%Y %H:%M'), class: 'form-control datetimepicker-input', data: { target: '#datetimepicker' } %>
+      <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+      </div>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions mt-3">
+    <%= form.submit t('acoes.salvar'), class: 'btn btn-primary' %>
+    <%= link_to t('acoes.cancelar'), action_name == 'edit' ? admin_promocao_path(promocao) : admin_promocoes_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  // $(document).on('turbolinks:load', function() {
+  //   $.fn.datepicker.defaults.language = 'pt-BR';
+  //   $.fn.datepicker.defaults.autoclose = true;
+  //   $.fn.datepicker.defaults.todayHighlight = true;
+  //   $.fn.datepicker.defaults.todayBtn = 'linked';
+  // });
+</script>
+
+<script type="text/javascript">
+  $(document).on('turbolinks:load', function () {
+    $('#datetimepicker').datetimepicker({
+      buttons: {
+        showToday: true,
+        showClear: true
+      },
+      icons: {
+        time: 'fa fa-clock',
+        close: 'fa fa-times',
+        today: 'fa fa-calendar-check',
+        clear: 'fa fa-trash'
+      },
+      defaultDate: moment($('#promocao_validade').val(), 'D/M/YYYY HH:mm')
+    });
+  });
+</script>
