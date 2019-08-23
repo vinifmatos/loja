@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_184759) do
 
   create_table "promocoes", force: :cascade do |t|
     t.integer "produto_id"
-    t.decimal "preco", precision: 15, scale: 2
+    t.decimal "desconto", precision: 15, scale: 2
     t.datetime "validade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
