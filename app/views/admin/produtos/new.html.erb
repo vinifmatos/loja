@@ -1,2 +1,2 @@
-<h1><%= t('acoes.novo', model: Produto.name) %></h1>
-<%= render 'form', produto: @produto %>
+<h1><%= t 'acoes.novo', model: @produto.class.model_name %></h1>
+<%= render 'form', produto: @produto, categorias: @categorias %>

@@ -1,7 +1,7 @@
 class Produto < ApplicationRecord
   belongs_to :categoria
   has_many :promocoes
-  has_many :imagens, foreign_key: :produto_id, class_name: 'ImagemProduto'
+  has_many :imagens, foreign_key: :produto_id, class_name: 'ImagemProduto', inverse_of: :produto
   accepts_nested_attributes_for :imagens, allow_destroy: true
 
   def thumbnail

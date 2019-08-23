@@ -1,9 +1,9 @@
 pt-BR:
   promocoes: Promoções
   acoes:
-    novo: Novo
-    editar: Editar
-    excluir: Excluir
+    novo: Novo %{model}
+    editar: Editar %{model}
+    excluir: Excluir %{model}
     voltar: Voltar
     salvar: Salvar
     cancelar: Cancelar

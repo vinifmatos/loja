@@ -5,7 +5,7 @@ class Admin::ProdutosController < Admin::AdminController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.all
+    @produtos = Produto.all.includes(:imagens)
   end
 
   # GET /produtos/1
@@ -16,7 +16,6 @@ class Admin::ProdutosController < Admin::AdminController
   # GET /produtos/new
   def new
     @produto = Produto.new
-    @imagem = @produto.imagens.build
   end
 
   # GET /produtos/1/edit
@@ -71,10 +70,10 @@ class Admin::ProdutosController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def produto_params
-      params.require(:produto).permit(:nome, :descricao, :preco, imagens_attributes: [:id, :imagem, :_destroy] )
+      params.require(:produto).permit(:nome, :descricao, :preco, :categoria_id, imagens_attributes: [:id, :imagem, :produto_id, :_destroy] )
     end
 
     def set_categorias
-      @categorias = Categoria.all.select(:id, :nome)
+      @categorias = Categoria.ativas.select(:id, :nome).collect { |c| [c.nome, c.id] }
     end
 end
