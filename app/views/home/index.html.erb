@@ -1,3 +1,5 @@
-<%= render 'partials/layout_produtos', categorias: @categorias do %>
-  <%= render 'partials/grid_promocoes', promocoes: @promocoes %>
+<%= render 'partials/layout_loja', categorias: @categorias do %>
+  <%= render 'partials/layout_produtos' do %>
+    <%= render 'partials/grid_promocoes', promocoes: @promocoes %>
+  <% end %>
 <% end %>

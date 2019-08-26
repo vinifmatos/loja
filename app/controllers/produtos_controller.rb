@@ -1,6 +1,8 @@
 class ProdutosController < ApplicationController
   before_action :set_produto, only: :show
-  before_action :set_categorias, only: :index
+  before_action :set_categorias
+
+  layout 'loja'
 
   # GET /produtos
   # GET /produtos.json

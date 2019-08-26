@@ -1,0 +1,23 @@
+<% imagens << ImagemProduto.new if imagens.empty? %>
+<div id="carrosselProduto" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <% (0...imagens.length).each do |i| %>
+      <%= tag.li data: { target: '#carrosselProduto', 'slide-to': i, class: i == 0 ? 'active' : nil } %>
+    <% end %>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <% imagens.each do |imagem| %>
+      <%= tag.div class: imagem == imagens.first ? 'carousel-item active' : 'carousel-item' do %>
+        <%= image_tag imagem.url, class: 'd-block img-fluid' %>
+      <% end %>
+    <% end %>
+  </div>
+  <a class="carousel-control-prev" href="#carrosselProduto" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only"><%= t('acoes.anterior') %></span>
+  </a>
+  <a class="carousel-control-next" href="#carrosselProduto" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only"><%= t('acoes.proximo') %></span>
+  </a>
+</div>
