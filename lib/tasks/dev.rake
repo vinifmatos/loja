@@ -1,10 +1,10 @@
 namespace :dev do
   desc "TODO"
-  task criadb: :environment do
+  task mkdb: :environment do
     `rails db:create db:migrate db:seed`
   end
 
-  task recriadb: :environment do
+  task rmkdb: :environment do
     `rails db:drop db:create db:migrate db:seed`
   end
 end
