@@ -61,14 +61,32 @@ class Admin::PromocoesController < Admin::AdminController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_promocao
-      @promocao = Promocao.find(params[:id])
+  def publicar
+    @promocao.publicar
+    if @promocao.save
+      format.json { render json: { publicada: true }, status: :ok, location: [:admin, @promocao] }
+    else
+      format.json { render json: @promocao.errors, status: :unprocessable_entity }
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def promocao_params
-      params.require(:promocao).permit(:produto_id, :preco, :preco, :validade)
+  def encerrar
+    @promocao.encerrar
+    if @promocao.save
+      format.json { render json: { encerrada: true }, status: :ok, location: [:admin, @promocao] }
+    else
+      format.json { render json: @promocao.errors, status: :unprocessable_entity }
     end
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_promocao
+    @promocao = Promocao.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def promocao_params
+    params.require(:promocao).permit(:produto_id, :desconto, :validade, :publicar, :encerrada)
+  end
 end

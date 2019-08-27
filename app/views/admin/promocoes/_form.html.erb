@@ -31,20 +31,16 @@
     </div>
   </div>
 
+  <div class="custom-control custom-switch">
+    <%= form.check_box :publicar, class: 'custom-control-input' %>
+    <%= form.label :publicar, class: 'custom-control-label' %>
+  </div>
+
   <div class="actions mt-3">
     <%= form.submit t('acoes.salvar'), class: 'btn btn-primary' %>
     <%= link_to t('acoes.cancelar'), action_name == 'edit' ? admin_promocao_path(promocao) : admin_promocoes_path, class: 'btn btn-primary' %>
   </div>
 <% end %>
-
-<script type="text/javascript">
-  // $(document).on('turbolinks:load', function() {
-  //   $.fn.datepicker.defaults.language = 'pt-BR';
-  //   $.fn.datepicker.defaults.autoclose = true;
-  //   $.fn.datepicker.defaults.todayHighlight = true;
-  //   $.fn.datepicker.defaults.todayBtn = 'linked';
-  // });
-</script>
 
 <script type="text/javascript">
   $(document).on('turbolinks:load', function () {

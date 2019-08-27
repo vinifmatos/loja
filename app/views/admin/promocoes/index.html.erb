@@ -9,7 +9,7 @@
               <%= image_tag promocao.produto.thumbnail, class: 'card-img', alt: '' %>
             <% end %>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <div class="card-body">
               <%= link_to admin_promocao_path(promocao) do %>
                 <h5 class="card-tittle"><%= "Promoção #{promocao.id}" %></h5>
@@ -19,6 +19,10 @@
               <%= "Desconto: #{promocao.desconto}" %><br>
               <%= "Validade: #{l promocao.validade, format: :long}" %><br>
             </div>
+          </div>
+          <div class="col-md-1">
+            <%= link_to fa_icon('check'), admin_publicar_promocao_path(promocao), remote: true, class: 'btn btn-primary btn-sm float-right mt-3 mr-3', style: 'width: 32px' %>
+            <%= link_to fa_icon('times'), admin_publicar_promocao_path(promocao), remote: true, disabled: promocao.publicada?, class: 'btn btn-primary btn-sm float-right mt-1 mr-3', style: 'width: 32px' %>
           </div>
         </div>
       </div>
