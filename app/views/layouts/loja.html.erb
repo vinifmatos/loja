@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Loja</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/navgation' %>
+
+    <div class="main-container">
+      <!-- Page Content -->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <h1 class="my-4">Shop Name</h1>
+            <%= render 'partials/categorias', categorias: @categorias, categoria_atual: @categoria_atual %>
+          </div>
+          <!-- /.col-lg-3 -->
+
+          <div class="col-lg-9">
+            <%= yield %>
+          </div>
+          <!-- /.col-lg-9 -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </div>
+    
+    <%= render 'layouts/footer' %>
+  </body>
+
+</html>

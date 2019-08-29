@@ -54,9 +54,11 @@ gem "mini_magick"
 
 gem "cocoon"
 
-# gem 'bootstrap-datepicker-rails'
-
 gem 'bootstrap4-datetime-picker-rails'
+
+gem 'devise'
+
+gem 'devise-i18n'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -64,6 +66,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'pry-rails'
 end
 
 group :development do

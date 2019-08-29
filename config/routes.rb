@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
+  devise_for :clientes
   namespace :admin do
     get '/', to: 'home#index'
     resources :produtos

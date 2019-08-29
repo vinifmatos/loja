@@ -15,9 +15,18 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Services</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
+        <% if cliente_signed_in? %>
+          <li class="nav-item dropdown">
+            <%= link_to current_cliente.email, '#', class: 'nav-link dropdown-toggle', id: 'dropUsuario', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } %>
+            <div class="dropdown-menu" aria-labelledby="dropUsuario">
+              <%= link_to t('acoes.sair'), destroy_cliente_session_path, method: :delete, class: 'dropdown-item' %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Entrar', new_cliente_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

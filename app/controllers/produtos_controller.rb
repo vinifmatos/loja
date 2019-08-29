@@ -1,6 +1,7 @@
 class ProdutosController < ApplicationController
+  include AreaLoja
+
   before_action :set_produto, only: :show
-  before_action :set_categorias, only: :index
 
   # GET /produtos
   # GET /produtos.json
@@ -31,9 +32,5 @@ class ProdutosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def produto_params
       params.require(:produto).permit(:nome, :descricao, :preco)
-    end
-
-    def set_categorias
-      @categorias = Categoria.all.select(:id, :nome)
     end
 end
