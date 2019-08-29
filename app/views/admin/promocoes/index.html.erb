@@ -20,12 +20,39 @@
               <%= "Validade: #{l promocao.validade, format: :long}" %><br>
             </div>
           </div>
-          <div class="col-md-1">
-            <%= link_to fa_icon('check'), admin_publicar_promocao_path(promocao), remote: true, class: 'btn btn-primary btn-sm float-right mt-3 mr-3', style: 'width: 32px' %>
-            <%= link_to fa_icon('times'), admin_publicar_promocao_path(promocao), remote: true, disabled: promocao.publicada?, class: 'btn btn-primary btn-sm float-right mt-1 mr-3', style: 'width: 32px' %>
+          <div class="col-md-1 pt-3 pr-3">
+            <%= button_tag 'Publicar', type: 'button', class: "btn btn-primary btn-sm float-right btn-publicar #{'d-none' if promocao.publicada?}", data: { url: admin_publicar_promocao_path(promocao) } %>
+            <%= button_tag 'Encerrar', type: 'button', class: "btn btn-primary btn-sm float-right btn-encerrar #{'d-none' unless promocao.publicada? && !promocao.encerrada?}", data: { url: admin_publicar_promocao_path(promocao) } %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+<script type='text/javascript'>
+  $(document).on('turbolinks:load', function () {
+    $('.btn-publicar').click(function () {
+      var url = $(this).attr('data-url')
+      $.post(url, function(data) {
+        if (data.publicado == '1') {
+          $(this).toggleClass('d-none');
+          $(this).closest('.btn-encerrar').toggleClass('d-none');
+        } else {
+          $.alert(data.erros)
+        }
+      });
+    });
+
+    $('.btn-encerrar').click(function () {
+      var url = $(this).attr('data-url')
+      $.post(url, function(data) {
+        if (data.encerrada == true) {
+          $(this).toggleClass('d-none');
+          $(this).closest('.btn-publicar').toggleClass('d-none');
+        } else {
+          $.alert(data.erros)
+        }
+      });
+    });
+  })
+</script>

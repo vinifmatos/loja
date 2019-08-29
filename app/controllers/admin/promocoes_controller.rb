@@ -1,5 +1,5 @@
 class Admin::PromocoesController < Admin::AdminController
-  before_action :set_promocao, only: [:show, :edit, :update, :destroy]
+  before_action :set_promocao, only: [:show, :edit, :update, :destroy, :publicar, :encerrar]
 
   # GET /promocoes
   # GET /promocoes.json
@@ -64,18 +64,18 @@ class Admin::PromocoesController < Admin::AdminController
   def publicar
     @promocao.publicar
     if @promocao.save
-      format.json { render json: { publicada: true }, status: :ok, location: [:admin, @promocao] }
+      format.json { render json: { publicada: true, status: :ok }.to_json }
     else
-      format.json { render json: @promocao.errors, status: :unprocessable_entity }
+      format.json { render json: { publicada: false, erros: @promocao.errors.to_json, status: :unprocessable_entity }.to_json }
     end
   end
 
   def encerrar
     @promocao.encerrar
     if @promocao.save
-      format.json { render json: { encerrada: true }, status: :ok, location: [:admin, @promocao] }
+      format.json { render json: { encerrada: true, status: :ok } }
     else
-      format.json { render json: @promocao.errors, status: :unprocessable_entity }
+      format.json { render json: { encerrada: true, erros: @promocao.errors.to_json, status: :unprocessable_entity } }
     end
   end
 
