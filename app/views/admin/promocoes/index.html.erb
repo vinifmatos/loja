@@ -57,6 +57,10 @@
       $.post(url, function(data) {
         if (data.encerrada) {
           $(btn).toggleClass('d-none');
+          $(btn).parents('.card-promocao').addClass('promocao-encerrada');
+          if (!$('#exibirEncerradas').is(':checked')) {
+            $(btn).parents('.card-promocao').addClass('d-none');
+          }
         } else {
           console.log(data)
         }
