@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :usuarios
-  devise_for :clientes
+  devise_for :clientes, controllers: {
+    sessions: 'clientes/sessions'
+  }
 
   namespace :admin do
     get '/', to: 'home#index'
@@ -19,4 +21,5 @@ Rails.application.routes.draw do
 
   root 'home#index'
   resources :produtos, only: [:index, :show]
+  resource :carrinho, only: [:show, :create, :update]
 end

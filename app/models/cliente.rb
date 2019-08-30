@@ -5,4 +5,6 @@ class Cliente < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable,
          :trackable
+  
+  has_many :carrinhos
 end

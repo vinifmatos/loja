@@ -15,6 +15,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Services</a>
         </li>
+        <li class="nav-item">
+          <%= link_to t('navbar.carrinho'), carrinho_path, class: 'nav-link' %>
+        </li>
         <% if cliente_signed_in? %>
           <li class="nav-item dropdown">
             <%= link_to current_cliente.email, '#', class: 'nav-link dropdown-toggle', id: 'dropUsuario', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } %>
