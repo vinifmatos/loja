@@ -1,7 +1,7 @@
 module AreaLoja
   extend ActiveSupport::Concern
 
-  included do 
+  included do
     layout 'loja'
     before_action :set_categoria_atual
     before_action :set_categorias, only: :index
@@ -20,7 +20,12 @@ module AreaLoja
   end
 
   def set_carrinho
-    @carrinho = session[:id_carrinho].present? ? Carrinho.find(session[:id_carrinho]) : Carrinho.create(cliente: current_cliente)
-    session[:id_carrinho] = @carrinho.id
+    if cookies.signed[:id_carrinho].present?
+      @carrinho = Carrinho.find(cookies.signed[:id_carrinho])
+      @carrinho.update(cliente: current_cliente) if @carrinho.cliente.nil? and cliente_signed_in?
+    else
+      @carrinho = Carrinho.create(cliente: current_cliente)
+    end
+    cookies.signed[:id_carrinho] = @carrinho.id
   end
 end

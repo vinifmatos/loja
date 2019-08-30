@@ -9,14 +9,22 @@ class Clientes::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+    if cookies.signed[:id_carrinho].present?
+      @carrinho = Carrinho.find(cookies.signed[:id_carrinho])
+      @carrinho.update(cliente: current_cliente) if @carrinho.cliente.nil? and cliente_signed_in?
+    else
+      @carrinho = Carrinho.create(cliente: current_cliente)
+    end
+    cookies.signed[:id_carrinho] = @carrinho.id
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+    cookies.delete :id_carrinho
+  end
 
   # protected
 
