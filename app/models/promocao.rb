@@ -4,7 +4,7 @@ class Promocao < ApplicationRecord
   scope :ativas, -> { where('validade > ?', Time.zone.now) }
 
   def publicar
-    self.publicacao ||= Time.now
+    self.publicacao ||= Time.now unless publicada?
   end
 
   def publicada?
@@ -12,7 +12,7 @@ class Promocao < ApplicationRecord
   end
 
   def encerrar
-    self.encerramento ||= Time.now
+    self.encerramento ||= Time.now unless encerrada?
   end
 
   def encerrada?

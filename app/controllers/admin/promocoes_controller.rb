@@ -63,19 +63,23 @@ class Admin::PromocoesController < Admin::AdminController
 
   def publicar
     @promocao.publicar
-    if @promocao.save
-      format.json { render json: { publicada: true, status: :ok }.to_json }
-    else
-      format.json { render json: { publicada: false, erros: @promocao.errors.to_json, status: :unprocessable_entity }.to_json }
+    respond_to do |format|
+      if @promocao.save
+        format.json { render json: { publicada: true }, status: :ok }
+      else
+        format.json { render json: { publicada: false, erros: @promocao.errors }, status: :unprocessable_entity }
+      end
     end
   end
 
   def encerrar
     @promocao.encerrar
-    if @promocao.save
-      format.json { render json: { encerrada: true, status: :ok } }
-    else
-      format.json { render json: { encerrada: true, erros: @promocao.errors.to_json, status: :unprocessable_entity } }
+    respond_to do |format|
+      if @promocao.save
+        format.json { render json: { encerrada: true }, status: :ok }
+      else
+        format.json { render json: { encerrada: false, erros: @promocao.errors }, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -1,8 +1,14 @@
 <div class="container">
-  <%= link_to t('acoes.nova', model: Promocao.name), new_admin_promocao_path, class: 'btn btn-primary' %>
+  <div class="row no-gutters">
+    <%= link_to t('acoes.nova', model: Promocao.name), new_admin_promocao_path, class: 'btn btn-primary' %>
+    <div class="custom-control custom-switch my-auto ml-auto">
+      <%= check_box_tag 'exibirEncerradas', 1, false, class: 'custom-control-input' %>
+      <%= label_tag 'exibirEncerradas', t('.promocoes.exibir_encerradas'), class: 'custom-control-label' %>
+    </div>
+  </div>
   <div class="row no-gutters mt-3">
     <% @promocoes.each do |promocao| %>
-      <div class="card mb-3" style="width: 100%;">
+      <div class="card mb-3 card-promocao <%= 'promocao-encerrada d-none' if promocao.encerrada? %>" style="width: 100%;">
         <div class="row no-gutters">
           <div class="col-md-4">
             <%= link_to admin_promocao_path(promocao) do %>
@@ -21,38 +27,48 @@
             </div>
           </div>
           <div class="col-md-1 pt-3 pr-3">
-            <%= button_tag 'Publicar', type: 'button', class: "btn btn-primary btn-sm float-right btn-publicar #{'d-none' if promocao.publicada?}", data: { url: admin_publicar_promocao_path(promocao) } %>
-            <%= button_tag 'Encerrar', type: 'button', class: "btn btn-primary btn-sm float-right btn-encerrar #{'d-none' unless promocao.publicada? && !promocao.encerrada?}", data: { url: admin_publicar_promocao_path(promocao) } %>
+            <%= button_tag 'Publicar', id: "btnPublicar#{promocao.id}", type: 'button', class: "btn btn-primary btn-sm float-right btn-publicar #{'d-none' if promocao.publicada? || promocao.encerrada?}", data: { url: admin_publicar_promocao_path(promocao) } %>
+            <%= button_tag t('acoes.encerrar'), id: "btnEncerrar#{promocao.id}", type: 'button', class: "btn btn-danger btn-sm float-right btn-encerrar #{'d-none' unless promocao.publicada? && !promocao.encerrada?}", data: { url: admin_encerrar_promocao_path(promocao) } %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 </div>
+
 <script type='text/javascript'>
   $(document).on('turbolinks:load', function () {
     $('.btn-publicar').click(function () {
-      var url = $(this).attr('data-url')
+      let btn = this
+      let url = $(btn).attr('data-url')
       $.post(url, function(data) {
-        if (data.publicado == '1') {
-          $(this).toggleClass('d-none');
-          $(this).closest('.btn-encerrar').toggleClass('d-none');
+        if (data.publicada) {
+          $(btn).toggleClass('d-none');
+          $($(btn).parent()).children('.btn-encerrar').toggleClass('d-none');
         } else {
-          $.alert(data.erros)
+          console.log(data)
         }
       });
     });
 
     $('.btn-encerrar').click(function () {
-      var url = $(this).attr('data-url')
+      let btn = this
+      let url = $(this).attr('data-url')
       $.post(url, function(data) {
-        if (data.encerrada == true) {
-          $(this).toggleClass('d-none');
-          $(this).closest('.btn-publicar').toggleClass('d-none');
+        if (data.encerrada) {
+          $(btn).toggleClass('d-none');
         } else {
-          $.alert(data.erros)
+          console.log(data)
         }
       });
+    });
+
+    $('#exibirEncerradas').change(function () {
+      if ($(this).is(':checked')) {
+        $('.promocao-encerrada').removeClass('d-none');
+      } else {
+        $('.promocao-encerrada').addClass('d-none');
+      }
     });
   })
 </script>

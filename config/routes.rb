@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :produtos
     resources :promocoes
     post '/promocao/publicar/:id', to: 'promocoes#publicar', format: [:js, :json], as: 'publicar_promocao'
-    post '/promocao/encerrar/:id', to: 'promocoes#publicar', format: [:js, :json], as: 'encerrar_promocao'
+    post '/promocao/encerrar/:id', to: 'promocoes#encerrar', format: [:js, :json], as: 'encerrar_promocao'
   end
   resources :categorias
   root 'home#index'
