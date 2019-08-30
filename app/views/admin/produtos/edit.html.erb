@@ -1,2 +1,2 @@
-<h1><%= t 'acoes.editar', model: @produto.class.model_name %></h1>
+<h1><%= t 'acoes.editar', model: @produto.class.model_name.human %></h1>
 <%= render 'form', produto: @produto, categorias: @categorias %>

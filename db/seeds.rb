@@ -7,3 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 u = Usuario.create email: 'admin@admin.com', password: '123456', password_confirmation: '123456', nome: 'admin'
+
+Configuracao.create json: { nome_loja: 'Loja', telefone: '(00) 01234-5678', email: 'loja@loja.com' }

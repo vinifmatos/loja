@@ -1,0 +1,5 @@
+pt-BR:
+  topbar:
+    pesquisa:
+      placeholder: Digite algo para pesquisar...
+      label: Pesquisar

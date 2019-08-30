@@ -1,12 +1,12 @@
 pt-BR:
-  promocoes: Promoções
   acoes:
     novo: Novo %{model}
     nova: Nova %{model}
     editar: Editar %{model}
     excluir: Excluir %{model}
     voltar: Voltar
-    salvar: Salvar
+    salvar: Salvar %{model}
     cancelar: Cancelar
     encerrar: Encerrar
     publicar: Publicar
+    sair: Sair

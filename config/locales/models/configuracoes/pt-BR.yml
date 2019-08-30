@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      configuracao:
+        one: Configuração
+        other: Configurações
+    attributes:
+      configuracao:
+        nome_loja: Nome
+        telefone_loja: Telefone
+        email_loja: Email

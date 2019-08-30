@@ -1,11 +1,11 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <%= link_to admin_path, class: 'sidebar-brand d-flex align-items-center justify-content-center' do %>
     <div class="sidebar-brand-icon">
       <%= fa_icon 'list-alt' %>
     </div>
-    <div class="sidebar-brand-text mx-3" style="font-size: small">Painel Administrativo</div>
-  </a>
+    <div class="sidebar-brand-text mx-3" style="font-size: small"><%= t 'sidebar.titulo' %></div>
+  <% end %>
 
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
@@ -30,11 +30,11 @@
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
       <%= fa_icon 'cog' %>
-      <span><%= t('.configuracoes') %></span>
+      <span><%= Configuracao.model_name.human count: 2 %></span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        
+        <%= link_to t('dadosloja.titulo'), admin_dadosloja_path, class: 'collapse-item' %>
       </div>
     </div>
   </li>
@@ -43,13 +43,13 @@
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLoja" aria-expanded="true" aria-controls="collapseLoja">
       <%= fa_icon 'store' %>
-      <span><%= t '.loja' %></span>
+      <span><%= t 'sidebar.loja' %></span>
     </a>
     <div id="collapseLoja" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header"><%= t '.header_collapse_loja' %></h6>
-        <%= link_to t('.produtos'), admin_produtos_path, class: 'collapse-item' %>
-        <%= link_to t('.promocoes'), admin_promocoes_path, class: 'collapse-item' %>
+        <h6 class="collapse-header"><%= t 'sidebar.header_collapse_loja' %></h6>
+        <%= link_to t('sidebar.produtos'), admin_produtos_path, class: 'collapse-item' %>
+        <%= link_to t('sidebar.promocoes'), admin_promocoes_path, class: 'collapse-item' %>
       </div>
     </div>
   </li>
@@ -58,12 +58,12 @@
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePedidos" aria-expanded="true" aria-controls="collapsePedidos">
       <%= fa_icon 'list' %>
-      <span><%= t('.pedidos') %></span>
+      <span><%= t('sidebar.pedidos') %></span>
     </a>
     <div id="collapsePedidos" class="collapse" aria-labelledby="headingPedidos" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <%= link_to t('.abertos'), '#', class: 'collapse-item' %>
-        <%= link_to t('.concluidos'), '#', class: 'collapse-item' %>
+        <%= link_to t('sidebar.menupedidos.abertos'), '#', class: 'collapse-item' %>
+        <%= link_to t('sidebar.menupedidos.concluidos'), '#', class: 'collapse-item' %>
       </div>
     </div>
   </li>

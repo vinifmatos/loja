@@ -1,0 +1,11 @@
+pt-BR:
+  sidebar:
+    titulo: Painel Administrativo
+    promocoes: Promoções
+    loja: Loja
+    header_collapse_loja: Cadastros da loja
+    produtos: Produtos
+    pedidos: Pedidos
+    menupedidos:
+      abertos: Abertos
+      concluidos: Concluídos

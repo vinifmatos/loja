@@ -1,0 +1,29 @@
+<div class="container h-100 py-3">
+  <div class="card">
+    <div class='card-header'>
+      <div class='row no-gutters'>
+        <h4 class='my-auto'><%= t 'dadosloja.titulo' %></h4>
+        <div class="ml-auto my-auto">
+          <%= link_to t('acoes.editar', model: @configuracao.class.model_name.human), admin_edit_dadosloja_path, class: 'btn btn-primary btn-sm' %>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <strong><%= "#{@configuracao.class.human_attribute_name :nome_loja}:" %></strong><br>
+        <%= @configuracao.nome_loja %>
+      </p>
+
+      <p class="card-text">
+        <strong><%= "#{@configuracao.class.human_attribute_name :telefone_loja}:" %></strong><br>
+        <%= @configuracao.telefone_loja %>
+      </p>
+
+      <p class="card-text">
+        <strong><%= "#{@configuracao.class.human_attribute_name :email_loja}:" %></strong><br>
+        <%= @configuracao.email_loja %>
+      </p>
+
+    </div>
+  </div>
+</div>

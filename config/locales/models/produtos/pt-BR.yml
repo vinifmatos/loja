@@ -3,7 +3,7 @@ pt-BR:
     models:
       produto:
         one: Produto
-        others: Produtos
+        other: Produtos
     attributes:
       produto:
         nome: Nome
