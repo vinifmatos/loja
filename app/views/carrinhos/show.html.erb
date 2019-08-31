@@ -1,17 +1,19 @@
-<div class='card my-4 h-100'>
-  <div class='card-header'>
-    <div class='row no-gutters'>
-      <h4 class='my-auto'><%= t 'carrinhos.titulo' %></h4>
-      <div class='ml-auto'>
-        <%= button_to t('carrinhos.removeritens'), removeritens_carrinho_path, class: 'btn btn-danger', disabled: @carrinho.itens.empty? %>
+<div class='d-flex flex-row h-100'>
+  <div class='card my-4 w-100'>
+    <div class='card-header'>
+      <div class='row no-gutters'>
+        <h4 class='my-auto'><%= t 'carrinhos.titulo' %></h4>
+        <div class='ml-auto'>
+          <%= button_to t('carrinhos.removeritens'), removeritens_carrinho_path, class: 'btn btn-danger', disabled: @carrinho.itens.empty? %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class='card-body'>
-    <% if @carrinho.produtos.empty? %>
-      <%= tag.h6 t('carrinhos.vazio'), class: 'text-center my-auto mx-auto' %>
-    <% else %>
-      <%= render 'itens_carrinho', carrinho: @carrinho %>
-    <% end %>
+    <div class='card-body d-flex flex-column'>
+      <% if @carrinho.produtos.empty? %>
+        <%= tag.h6 t('carrinhos.vazio'), class: 'text-center my-auto mx-auto' %>
+      <% else %>
+        <%= render 'itens_carrinho', carrinho: @carrinho %>
+      <% end %>
+    </div>
   </div>
 </div>
