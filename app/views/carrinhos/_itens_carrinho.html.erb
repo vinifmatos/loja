@@ -6,15 +6,17 @@
           <%= image_tag item.produto.thumbnail, class: 'card-img', alt: '' %>
         <% end %>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-6">
         <div class="card-body">
           <%= link_to produto_path(item.produto) do %>
-            <h5 class="card-tittle"><%= "Promoção #{item.produto.id}" %></h5>
+            <h5 class="card-tittle"><%= item.produto.nome %></h5>
           <% end %>
-          <%= "Produto: #{item.produto.nome}" %><br>
           <%= "Valor unitário: #{item.produto.preco}" %><br>
           <%= "Quantidade: #{item.quantidade}" %><br>
         </div>
+      </div>
+      <div class='col-md-2 pr-3 pt-3'>
+        <%= button_to t('acoes.remover'), remover_carrinho_path(item.produto), class: 'btn btn-danger btn-sm float-right' %>
       </div>
     </div>
   </div>

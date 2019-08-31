@@ -1,23 +1,11 @@
-module AreaLoja
+module RotinasCarrinho
   extend ActiveSupport::Concern
 
   included do
-    include RotinasCarrinho
-    layout 'loja'
-    before_action :set_categoria_atual
-    before_action :set_categorias
     before_action :set_carrinho
   end
 
   private
-
-  def set_categorias
-    @categorias = Categoria.all.select(:id, :nome)
-  end
-
-  def set_categoria_atual
-    @categoria_atual = params[:categoria]
-  end
 
   def set_carrinho
     if cookies.signed[:id_carrinho].present?
@@ -30,6 +18,6 @@ module AreaLoja
     else
       @carrinho = Carrinho.create(cliente: current_cliente)
     end
-    cookies.signed[:id_carrinho] = @carrinho.id
+    cookies.signed[:id_carrinho] = { value: @carrinho.id, expires: 6.hour }
   end
 end

@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   scope 'carrinho' do
     post 'removeritens', to: 'carrinhos#remover_itens', as: 'removeritens_carrinho'
     post 'adicionar/:id_produto', to: 'carrinhos#adicionar', as: 'adicionar_carrinho'
+    post 'remover/:id_produto', to: 'carrinhos#remover', as: 'remover_carrinho'
   end
 end
