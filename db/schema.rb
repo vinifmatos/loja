@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2019_08_30_174448) do
   create_table "produto_carrinhos", force: :cascade do |t|
     t.integer "carrinho_id"
     t.integer "produto_id"
-    t.integer "quantidade"
+    t.integer "quantidade", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["carrinho_id"], name: "index_produto_carrinhos_on_carrinho_id"

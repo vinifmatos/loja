@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   include AreaLoja
-  
+
   before_action :get_promocoes, only: :index
-  skip_before_action :authenticate_cliente!
+  skip_before_action :set_categorias, except: :index
 
   def index
   end

@@ -24,7 +24,7 @@
           <p class="card-text">
             <h1><%= number_to_currency @produto.preco %></h1>
           </p>
-          <%= link_to t("acoes.comprar"), '#', class: 'btn btn-primary btn-lg btn-block' %>
+          <%= link_to t("acoes.comprar"), adicionar_carrinho_path(@produto), method: :post, class: 'btn btn-primary btn-lg btn-block' %>
         </div>
       </div>
     </div>

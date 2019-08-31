@@ -1,0 +1,21 @@
+<% carrinho.itens.each do |item| %>
+  <div class="card mb-3" style="width: 100%;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <%= link_to '' do %>
+          <%= image_tag item.produto.thumbnail, class: 'card-img', alt: '' %>
+        <% end %>
+      </div>
+      <div class="col-md-7">
+        <div class="card-body">
+          <%= link_to produto_path(item.produto) do %>
+            <h5 class="card-tittle"><%= "Promoção #{item.produto.id}" %></h5>
+          <% end %>
+          <%= "Produto: #{item.produto.nome}" %><br>
+          <%= "Valor unitário: #{item.produto.preco}" %><br>
+          <%= "Quantidade: #{item.quantidade}" %><br>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

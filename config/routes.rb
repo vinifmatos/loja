@@ -21,5 +21,9 @@ Rails.application.routes.draw do
 
   root 'home#index'
   resources :produtos, only: [:index, :show]
-  resource :carrinho, only: [:show, :create, :update]
+  resource :carrinho, only: [:show]
+  scope 'carrinho' do
+    post 'removeritens', to: 'carrinhos#remover_itens', as: 'removeritens_carrinho'
+    post 'adicionar/:id_produto', to: 'carrinhos#adicionar', as: 'adicionar_carrinho'
+  end
 end

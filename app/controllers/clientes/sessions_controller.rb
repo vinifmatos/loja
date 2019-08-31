@@ -12,8 +12,12 @@ class Clientes::SessionsController < Devise::SessionsController
   def create
     super
     if cookies.signed[:id_carrinho].present?
-      @carrinho = Carrinho.find(cookies.signed[:id_carrinho])
-      @carrinho.update(cliente: current_cliente) if @carrinho.cliente.nil? and cliente_signed_in?
+      begin
+        @carrinho = Carrinho.find(cookies.signed[:id_carrinho])
+        @carrinho.update(cliente: current_cliente) if @carrinho.cliente.nil? and cliente_signed_in?
+      rescue ActiveRecord::RecordNotFound
+        @carrinho = Carrinho.create(cliente: current_cliente)
+      end
     else
       @carrinho = Carrinho.create(cliente: current_cliente)
     end
