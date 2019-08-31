@@ -15,18 +15,38 @@
 @import "bootstrap";
 @import "font_awesome5_webfont";
 
-html, body {
+html,
+body {
   height: 100%;
 }
+
 body {
-    padding-top: 56px;
-    display: flex;
-    flex-direction: column;
+  padding-top: 56px;
+  display: flex;
+  flex-direction: column;
 }
+
 .main-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1
+}
+
+.flex {
   flex: 1;
 }
 
 .h-100 {
   height: 100%;
+}
+
+.sidebar-container {
+  height: 100%;
+  width: 25%;
+}
+
+.content-container {
+  height: 100%;
+  flex: 1;
+  padding-left: 15px;
 }
