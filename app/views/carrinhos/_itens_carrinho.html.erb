@@ -1,23 +1,50 @@
 <% carrinho.itens.each do |item| %>
   <div class="card mb-3" style="width: 100%;">
     <div class="row no-gutters">
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <%= link_to '' do %>
           <%= image_tag item.produto.thumbnail, class: 'card-img', alt: '' %>
         <% end %>
       </div>
-      <div class="col-md-6">
+      <div class="col-lg">
         <div class="card-body">
           <%= link_to produto_path(item.produto) do %>
             <h5 class="card-tittle"><%= item.produto.nome %></h5>
           <% end %>
           <%= "Valor unitário: #{item.produto.preco}" %><br>
           <%= "Quantidade: #{item.quantidade}" %><br>
+          <div class="input-group quantidade">
+            <div class="input-group-prepend">
+              <%= button_tag fa_icon('minus'), class: 'btn btn-danger btn-quantidade-diminui', type: :button %>
+            </div>
+            <%= text_field_tag :quantidade, item.quantidade, class: 'form-control input-quantidade', id: "quantidadeProduto#{item.produto.id}" %>
+            <div class="input-group-append">
+              <%= button_tag fa_icon('plus'), class: 'btn btn-success btn-quantidade-aumenta', type: :button %>
+            </div>
+          </div>
         </div>
       </div>
-      <div class='col-md-2 pr-3 pt-3'>
+      <div class='col-lg-1 pr-3 py-3 bg-success'>
         <%= button_to t('acoes.remover'), remover_carrinho_path(item.produto), class: 'btn btn-danger btn-sm float-right' %>
       </div>
     </div>
   </div>
 <% end %>
+
+<script type='text/javascript'>
+  $(document).on('turbolinks:load', function () {
+    $('.btn-quantidade-aumenta').click(function () {
+      let input = $(this).parents('.input-group').children('.input-quantidade')
+      let valor_atual = parseInt($(input).val())
+      $(input).val(valor_atual + 1);
+    });
+
+    $('.btn-quantidade-diminui').click(function () {
+      let input = $(this).parents('.input-group').children('.input-quantidade')
+      let valor_atual = parseInt($(input).val())
+      if (valor_atual > 1) {
+        $(input).val(valor_atual - 1);
+      }
+    });
+  })
+</script>
