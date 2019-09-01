@@ -42,4 +42,14 @@ class CarrinhosController < ApplicationController
       end
     end
   end
+
+  def atualiza_quantidade
+    respond_to do |format|
+      if @carrinho.atualiza_quantidade params.require(:produto_carrinho).permit(:id, :quantidade)
+        format.json { render json: { status: true }, status: :ok, location: @carrinho }
+      else
+        format.json { render json: { status: true, erros: @carrinho.errors }, status: :unprocessable_entity }
+      end
+    end
+  end
 end

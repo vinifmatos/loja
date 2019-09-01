@@ -1,30 +1,49 @@
 <% carrinho.itens.each do |item| %>
   <div class="card mb-3" style="width: 100%;">
     <div class="row no-gutters">
-      <div class="col-lg-4">
-        <%= link_to '' do %>
-          <%= image_tag item.produto.thumbnail, class: 'card-img', alt: '' %>
+      <div class="col-lg-3">
+        <%= link_to produto_path(item.produto) do %>
+          <%= image_tag item.produto.thumbnail, class: 'card-img' %>
         <% end %>
       </div>
+
       <div class="col-lg">
         <div class="card-body">
           <%= link_to produto_path(item.produto) do %>
             <h5 class="card-tittle"><%= item.produto.nome %></h5>
           <% end %>
-          <%= "Valor unitário: #{item.produto.preco}" %><br>
-          <%= "Quantidade: #{item.quantidade}" %><br>
-          <div class="input-group quantidade">
-            <div class="input-group-prepend">
-              <%= button_tag fa_icon('minus'), class: 'btn btn-danger btn-quantidade-diminui', type: :button %>
+
+          <div class='form-group row'>
+            <%= label_tag :valor_unitario, 'Valor unitário:', class: 'my-auto' %>
+
+            <%= text_field_tag :valor_unitario, number_to_currency(item.produto.preco), id: "valorUnitario#{item.id}", class: 'form-control-plaintext ml-2 w-auto', readonly: true %>
+          </div>
+
+          <div class= 'form-group row'>
+            <%= label_tag :quantidade, 'Quantidade:', class: 'my-auto' %>
+
+            <div class="input-group quantidade ml-2">
+              <div class="input-group-prepend">
+                <%= button_tag fa_icon('minus'), class: 'btn btn-danger btn-quantidade-diminui', type: :button %>
+              </div>
+
+              <%= text_field_tag :quantidade, item.quantidade, class: 'form-control input-quantidade', id: "quantidadeProduto#{item.produto.id}", data: { 'id-item': item.id} %>
+
+              <div class="input-group-append">
+                <%= button_tag fa_icon('plus'), class: 'btn btn-success btn-quantidade-aumenta', type: :button %>
+              </div>
             </div>
-            <%= text_field_tag :quantidade, item.quantidade, class: 'form-control input-quantidade', id: "quantidadeProduto#{item.produto.id}" %>
-            <div class="input-group-append">
-              <%= button_tag fa_icon('plus'), class: 'btn btn-success btn-quantidade-aumenta', type: :button %>
-            </div>
+          </div>
+
+          <div class='form-group row'>
+            <%= label_tag :valor_total, 'Valor total:', class: 'my-auto' %>
+
+            <%= text_field_tag :valor_total, number_to_currency(item.produto.preco * item.quantidade), id: "valorTotal#{item.id}", class: 'form-control-plaintext ml-2 w-auto', readonly: true %>
           </div>
         </div>
       </div>
-      <div class='col-lg-1 pr-3 py-3 bg-success'>
+
+      <div class='col-lg-1 pr-3 py-3'>
         <%= button_to t('acoes.remover'), remover_carrinho_path(item.produto), class: 'btn btn-danger btn-sm float-right' %>
       </div>
     </div>
@@ -32,18 +51,105 @@
 <% end %>
 
 <script type='text/javascript'>
+  function atualiza_quantidade(id_item, quantidade) {
+    let path = '<%= atualiza_quantidade_carrinho_path %>'
+    let dados = {
+      "produto_carrinho": {
+        "id": id_item,
+      "quantidade": quantidade
+      },
+      'authenticity_token': Rails.csrfToken()
+    }
+    $.post(path, dados, function (data) {
+      return data.status
+    })
+  }
+
+  function parseStrToFloat(str) {
+    let formatos = {
+      "ptBR": /\d+[\.\d+]*(?:,\d+)$/g,
+      "us": /\d+[,\d+]*(?:\.\d+)$/g
+    }
+
+    str = str.match(/\d+[(?:\.|,)\d+]*[,\.]\d+/g)[0]
+
+    if (formatos.ptBR.test(str)) {
+      return parseFloat(str.replace('.', '').replace(',', '.'))
+    } else if (formatos.us.test(str)) {
+      return parseFloat(str.replace(',', ''))
+    } else {
+      return null
+    }
+  }
+
+  function formataMoeda(valor, moeda) {
+  let grupos = []
+  let moedas = {
+    'R$': {
+      'formato': /\d+[\.\d+]*(?:,\d+)$/g,
+      'decimal': ',',
+      'separador': '.'
+    },
+    'U$': {
+      'formato': /\d+[,\d+]*(?:\.\d+)$/g,
+      'decimal': '.',
+      'separador': ','
+    }
+  }
+
+  let str = valor.split('.')
+
+  for (let i = str[0].length; i > 0; i -= 3) {
+    if (i - 3 > 0) {
+      grupos.push(str[0].slice(i - 3, i))
+    } else {
+      grupos.push(str[0].slice(0, i))
+    }
+  }
+
+  return [moeda, ' ', grupos.reverse().join(moedas[moeda].separador), moedas[moeda].decimal, str[1]].join('')
+}
+
+  function atualiza_valor_total(id, quantidade) {
+    let valor_unitario = parseStrToFloat($('#valorUnitario' + id).val())
+    let regex_moeda = /^(?:[A-Za-z]{0,2}\$)/g
+    let valor_total = (valor_unitario * quantidade).toFixed(2)
+    let valor_formatado = formataMoeda(valor_total, regex_moeda.exec($('#valorUnitario' + id).val())[0])
+
+    $('#valorTotal' + id).val(valor_formatado)
+  }
+
   $(document).on('turbolinks:load', function () {
     $('.btn-quantidade-aumenta').click(function () {
       let input = $(this).parents('.input-group').children('.input-quantidade')
+      let id_item = $(input).attr('data-id-item')
       let valor_atual = parseInt($(input).val())
-      $(input).val(valor_atual + 1);
+      let valor_novo = valor_atual + 1
+      $(input).val(valor_novo);
+      atualiza_valor_total(id_item, valor_novo)
+      atualiza_quantidade(id_item, valor_novo)
     });
 
     $('.btn-quantidade-diminui').click(function () {
       let input = $(this).parents('.input-group').children('.input-quantidade')
+      let id_item = $(input).attr('data-id-item')
       let valor_atual = parseInt($(input).val())
       if (valor_atual > 1) {
-        $(input).val(valor_atual - 1);
+        let valor_novo = valor_atual - 1
+        $(input).val(valor_novo)
+        atualiza_valor_total(id_item, valor_novo)
+        atualiza_quantidade(id_item, valor_novo)
+      }
+    });
+
+    $('.input-quantidade').change(function () {
+      let id_item = $(this).attr('data-id-item')
+      let valor_novo = parseInt($(this).val())
+      if (valor_novo > 0) {
+        atualiza_valor_total(id_item, valor_novo)
+        atualiza_quantidade(id_item, valor_novo)
+      } else {
+        $(this).val(1)
       }
     });
   })

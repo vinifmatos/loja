@@ -26,5 +26,6 @@ Rails.application.routes.draw do
     post 'removeritens', to: 'carrinhos#remover_itens', as: 'removeritens_carrinho'
     post 'adicionar/:id_produto', to: 'carrinhos#adicionar', as: 'adicionar_carrinho'
     post 'remover/:id_produto', to: 'carrinhos#remover', as: 'remover_carrinho'
+    post 'quantidade/', to: 'carrinhos#atualiza_quantidade', as: 'atualiza_quantidade_carrinho'
   end
 end

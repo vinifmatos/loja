@@ -17,4 +17,10 @@ class Carrinho < ApplicationRecord
     item = itens.find_by(produto_id: id_produto)
     itens.destroy item
   end
+
+  def atualiza_quantidade(item_carrino)
+    item = itens.find(item_carrino[:id])
+    item.quantidade = item_carrino[:quantidade]
+    item.save
+  end
 end
