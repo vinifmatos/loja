@@ -52,5 +52,14 @@ body {
 }
 
 .input-group.quantidade {
-  width: 10rem;
+  width: 9rem;
+}
+
+.container-item {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.w-6-rem {
+  width: 6rem !important;
 }
