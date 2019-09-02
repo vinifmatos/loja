@@ -62,7 +62,7 @@ class Admin::PromocoesController < Admin::AdminController
   end
 
   def publicar
-    @promocao.publicar
+    @promocao.publicar!
     respond_to do |format|
       if @promocao.save
         format.json { render json: { publicada: true }, status: :ok }
@@ -73,7 +73,7 @@ class Admin::PromocoesController < Admin::AdminController
   end
 
   def encerrar
-    @promocao.encerrar
+    @promocao.encerrar!
     respond_to do |format|
       if @promocao.save
         format.json { render json: { encerrada: true }, status: :ok }

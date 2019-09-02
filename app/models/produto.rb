@@ -7,4 +7,14 @@ class Produto < ApplicationRecord
   def thumbnail
     imagens.first.try(:imagem).try(:thumb).try(:url) || ImagemProduto.new.imagem.thumb.url
   end
+
+  def tem_promocao?
+    promocoes.ativas.count.positive?
+  end
+
+  def preco_com_desconto
+    return preco - promocoes.ativas.first.desconto if tem_promocao?
+
+    preco
+  end
 end

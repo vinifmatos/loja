@@ -8,14 +8,14 @@ namespace :dev do
     `rails db:drop db:create db:migrate db:seed dev:seed`
   end
 
-  task seed: :environment do 
+  task seed: :environment do
     c = FactoryBot.create_list(:categoria, 5)
-    (0..24).each do |i|
+    24.times do
       FactoryBot.create(:produto, categoria: c.sample)
     end
     p = Produto.all
 
-    (0..9).each do |i|
+    9.times do
       FactoryBot.create(:promocao, produto: p.sample)
     end
 

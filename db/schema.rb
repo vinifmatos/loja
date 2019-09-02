@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_174448) do
+ActiveRecord::Schema.define(version: 2019_09_02_004102) do
 
   create_table "carrinhos", force: :cascade do |t|
     t.integer "cliente_id"
@@ -66,12 +66,23 @@ ActiveRecord::Schema.define(version: 2019_08_30_174448) do
     t.index ["produto_id"], name: "index_imagem_produtos_on_produto_id"
   end
 
+  create_table "pedidos", force: :cascade do |t|
+    t.integer "situacao"
+    t.integer "carrinho_id"
+    t.datetime "data"
+    t.decimal "valor", precision: 15, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrinho_id"], name: "index_pedidos_on_carrinho_id"
+  end
+
   create_table "produto_carrinhos", force: :cascade do |t|
     t.integer "carrinho_id"
     t.integer "produto_id"
     t.integer "quantidade", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "valor_unitario", precision: 15, scale: 2, default: "0.0", null: false
     t.index ["carrinho_id"], name: "index_produto_carrinhos_on_carrinho_id"
     t.index ["produto_id"], name: "index_produto_carrinhos_on_produto_id"
   end
