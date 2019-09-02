@@ -28,4 +28,6 @@ Rails.application.routes.draw do
     post 'remover/:id_produto', to: 'carrinhos#remover', as: 'remover_carrinho'
     post 'quantidade/', to: 'carrinhos#atualiza_quantidade', as: 'atualiza_quantidade_carrinho'
   end
+
+  resources :pedidos, only: [:index, :show]
 end

@@ -16,6 +16,10 @@ class Pedido < ApplicationRecord
     carrinho.cliente
   end
 
+  def t_situacao
+    Pedido.human_enum_name :situacoes, Pedido.situacoes.key(self.situacao)
+  end
+
   private
 
   def set_valor

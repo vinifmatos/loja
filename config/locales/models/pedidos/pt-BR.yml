@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      pedidos:
+        one: Pedido
+        other: Pedidos
+    attributes:
+      pedido:
+        data: Data
+        situacao: Situção
+        valor: Valor
+        situacoes:
+          processando: Processando
+          aguardando_pagamento: Aguardando pagamento
+          separacao_produtos: Produtos em separação
+          nota_fiscal_emitida: Nota Fiscal emitida
+          em_transporte: Pedido em transporte
+          concluido: Concluído

@@ -1,0 +1,45 @@
+<div class='container my-3'>
+  <div class='card'>
+    <div class='card-header'>
+      <h4 class='my-auto'><%= t 'pedidos.titulo' %></h4>
+    </div>
+    <div class='card-body'>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th scope='col'>#</th>
+            <th scope='col'>Data</th>
+            <th scope='col'>Situação</th>
+            <th scope='col'>Valor</th>
+            <th scope='col'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pedidos.each do |pedido| %>
+            <tr>
+              <th scope='row'>
+                <%= pedido.id %>
+              </th>
+
+              <td>
+                <%= l pedido.data, format: :data %>
+              </td>
+
+              <td>
+                <%= pedido.t_situacao %>
+              </td>
+
+              <td>
+                <%= number_to_currency pedido.valor %>
+              </td>
+
+              <td class='text-center'>
+                <%= link_to t('pedidos.detalhes'), pedido_path(pedido) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

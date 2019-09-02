@@ -1,0 +1,9 @@
+pt-BR:
+  dates:
+    formats:
+      default: '%d/%m/%Y'
+  time:
+    formats:
+      default: '%d/%m/%Y %H:%M'
+      extenso: "%a, %d de %B de %Y, %H:%M:%S %z"
+      data: '%d/%m/%Y'
