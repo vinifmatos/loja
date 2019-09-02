@@ -1,7 +1,7 @@
 class Promocao < ApplicationRecord
   belongs_to :produto
 
-  scope :ativas, -> { where('validade > ? and encerramento < ?', Time.zone.now, Time.zone.now) }
+  scope :ativas, -> { where('validade > ? and (encerramento is null or encerramento < ?)', Time.zone.now, Time.zone.now) }
 
   def publicar!
     self.publicacao ||= Time.now unless publicada?
