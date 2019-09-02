@@ -1,8 +1,10 @@
 class Pedido < ApplicationRecord
   belongs_to :carrinho
+  belongs_to :cliente
   before_create :set_valor
   before_create :set_data
   before_create :set_situacao
+  before_create :set_cliente
 
   enum situacoes: [:processando, :aguardando_pagamento, :separacao_produtos, :nota_fiscal_emitida, :em_transporte, :concluido]
 
@@ -26,5 +28,9 @@ class Pedido < ApplicationRecord
 
   def set_situacao
     self.situacao = self.class.situacoes[:processando]
+  end
+
+  def set_cliente
+    self.cliente = carrinho.cliente
   end
 end

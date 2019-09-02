@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_004102) do
+ActiveRecord::Schema.define(version: 2019_09_02_154137) do
 
   create_table "carrinhos", force: :cascade do |t|
     t.integer "cliente_id"
@@ -73,7 +73,9 @@ ActiveRecord::Schema.define(version: 2019_09_02_004102) do
     t.decimal "valor", precision: 15, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cliente_id"
     t.index ["carrinho_id"], name: "index_pedidos_on_carrinho_id"
+    t.index ["cliente_id"], name: "index_pedidos_on_cliente_id"
   end
 
   create_table "produto_carrinhos", force: :cascade do |t|

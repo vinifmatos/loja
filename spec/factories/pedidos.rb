@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :pedido do
-    status { 1 }
-    carrinho { nil }
-    data { "2019-09-01 20:22:09" }
+    situacao { Pedido.situacoes[:processando] }
+    cliente
+    carrinho { FactoryBot.create(:carrinho, cliente: cliente) }
+    data { Faker::Date.between(from: Date.today, to:7.days.from_now) }
   end
 end

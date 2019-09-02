@@ -7,4 +7,5 @@ class Cliente < ApplicationRecord
          :trackable
   
   has_many :carrinhos
+  has_many :pedidos, through: :carrinhos
 end
