@@ -6,16 +6,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="nav-item <%= 'active' if home? %>">
           <%= link_to 'Home', root_path, class: 'nav-link' %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+        <li class="nav-item <%= 'active' if pedidos? %>">
+          <%= link_to t('navbar.pedidos'), pedidos_path, class: 'nav-link' %>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Services</a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if carrinho? %>">
           <%= link_to t('navbar.carrinho'), carrinho_path, class: 'nav-link' %>
         </li>
         <% if cliente_signed_in? %>

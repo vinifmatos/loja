@@ -1,0 +1,5 @@
+<ul class='side-nav'>
+  <%= link_to t('navbar.pedidos'), pedidos_path, class: "side-nav-item side-nav-item-action #{'active' if pedidos?}" %>
+  <%= link_to t('navbar.perfil'), '#', class: "side-nav-item side-nav-item-action #{'active' if perfil?}" %>
+  <%= link_to 'link', '#', class: "side-nav-item side-nav-item-action #{'active' if 1==0}" %>
+</ul>
