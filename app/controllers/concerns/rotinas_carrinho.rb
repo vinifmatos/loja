@@ -20,4 +20,8 @@ module RotinasCarrinho
     end
     cookies.signed[:id_carrinho] = { value: @carrinho.id, expires: 6.hour }
   end
+
+  def get_carrinho
+    Carrinho.find(cookies.signed[:id_carrinho])
+  end
 end
