@@ -1,10 +1,6 @@
 module RotinasCarrinho
   extend ActiveSupport::Concern
 
-  included do
-    before_action :set_carrinho
-  end
-
   private
 
   def set_carrinho

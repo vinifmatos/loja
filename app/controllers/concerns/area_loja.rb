@@ -6,6 +6,7 @@ module AreaLoja
     layout 'loja'
     before_action :set_categoria_atual
     before_action :set_categorias
+    before_action :set_carrinho
   end
 
   private

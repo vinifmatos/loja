@@ -1,3 +1,12 @@
-// Place all the styles related to the pedidos controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.endereco {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  width: 30rem;
+}
+
+.endereco-cep {
+  width: 7rem;
+}
+
+.endereco-numero {
+  width: 5rem;
+}

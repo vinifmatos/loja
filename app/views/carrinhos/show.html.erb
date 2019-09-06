@@ -3,7 +3,10 @@
     <div class='card-header'>
       <div class='row no-gutters'>
         <h4 class='my-auto'><%= t 'carrinhos.titulo' %></h4>
-        <div class='ml-auto'>
+        <div class='ml-auto mr-1'>
+          <%= link_to t('carrinhos.finalizar_compra'), new_pedido_path, class: 'btn btn-success', disabled: @carrinho.itens.empty? %>
+        </div>
+        <div>
           <%= button_to t('carrinhos.removeritens'), removeritens_carrinho_path, class: 'btn btn-danger', disabled: @carrinho.itens.empty? %>
         </div>
       </div>

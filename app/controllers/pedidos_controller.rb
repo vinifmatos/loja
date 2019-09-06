@@ -1,4 +1,6 @@
 class PedidosController < ApplicationController
+  include RotinasCarrinho
+
   before_action :authenticate_cliente!
 
   def index
@@ -6,7 +8,17 @@ class PedidosController < ApplicationController
   end
 
   def new
-    @pedido = Pedido.new
-    @pedido.carrinho = RotinasCarrinho.get_carrinho
+    @pedido = Pedido.new carrinho: get_carrinho
+    
+  end
+
+  private
+
+  def set_pedido
+    @pedido = Pedido.find(params[:id])
+  end
+
+  def pedidos_params
+    params.require(:pedido).permit(:carrinho_id, :descricao, :preco, endereco_cliente: [:cep, :logradouro, :bairro, :cidade, :numero, :complemento])
   end
 end

@@ -1,0 +1,41 @@
+<div class="form-group">
+  <%= endereco.label :cep %>
+  <%= endereco.text_field :cep, class: 'form-control endereco-cep', data: { inputmask: "'mask': '99999-999'" } %>
+</div>
+
+<div class="form-group">
+  <%= endereco.label :logradouro %>
+  <%= endereco.text_field :logradouro, class: 'form-control' %>
+</div>
+
+<div class='row no-gutters'>
+  <div class='col-lg-3 pr-2'>
+    <div class="form-group">
+      <%= endereco.label :numero %>
+      <%= endereco.text_field :numero, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='col-lg-9'>
+    <div class="form-group">
+      <%= endereco.label :complemento %>
+      <%= endereco.text_field :complemento, class: 'form-control' %>
+    </div>
+  </div>
+</div>
+
+<div class='row no-gutters'>
+  <div class='col-lg-6 pr-2'>
+    <div class="form-group">
+    <%= endereco.label :bairro %>
+    <%= endereco.text_field :bairro, class: 'form-control' %>
+  </div>
+  </div>
+
+  <div class='col-lg-6'>
+    <div class="form-group">
+      <%= endereco.label :cidade %>
+      <%= endereco.text_field :cidade, class: 'form-control' %>
+    </div>
+  </div>
+</div>

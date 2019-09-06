@@ -3,7 +3,6 @@
 class Clientes::SessionsController < Devise::SessionsController
   include RotinasCarrinho
 
-  skip_before_action :set_carrinho
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

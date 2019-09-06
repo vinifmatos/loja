@@ -1,12 +1,19 @@
 class Pedido < ApplicationRecord
   belongs_to :carrinho
   belongs_to :cliente
+
+  has_one :endereco_cliente
+
   before_create :set_valor
   before_create :set_data
   before_create :set_situacao
   before_create :set_cliente
 
+  after_initialize :set_valor
+
   enum situacoes: [:processando, :aguardando_pagamento, :separacao_produtos, :nota_fiscal_emitida, :em_transporte, :concluido]
+
+  accepts_nested_attributes_for :endereco_cliente, allow_destroy: true
 
   def itens
     carrinho.itens

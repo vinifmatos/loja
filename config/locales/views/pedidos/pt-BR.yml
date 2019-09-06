@@ -2,3 +2,6 @@ pt-BR:
   pedidos:
     detalhes: detalhes
     titulo: Meus pedidos
+    form:
+      detalhes: Detalhes do pedido
+      endereco: Endereço para entrega

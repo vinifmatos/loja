@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_154137) do
+ActiveRecord::Schema.define(version: 2019_09_06_135128) do
 
   create_table "carrinhos", force: :cascade do |t|
     t.integer "cliente_id"
@@ -58,6 +58,21 @@ ActiveRecord::Schema.define(version: 2019_09_02_154137) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "endereco_clientes", force: :cascade do |t|
+    t.string "cep"
+    t.string "logradouro"
+    t.string "numero"
+    t.string "bairro"
+    t.string "cidade"
+    t.string "complemento"
+    t.integer "pedidos_id"
+    t.integer "cliente_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_endereco_clientes_on_cliente_id"
+    t.index ["pedidos_id"], name: "index_endereco_clientes_on_pedidos_id"
+  end
+
   create_table "imagem_produtos", force: :cascade do |t|
     t.integer "produto_id"
     t.string "imagem"
@@ -74,8 +89,10 @@ ActiveRecord::Schema.define(version: 2019_09_02_154137) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cliente_id"
+    t.integer "endereco_cliente_id"
     t.index ["carrinho_id"], name: "index_pedidos_on_carrinho_id"
     t.index ["cliente_id"], name: "index_pedidos_on_cliente_id"
+    t.index ["endereco_cliente_id"], name: "index_pedidos_on_endereco_cliente_id"
   end
 
   create_table "produto_carrinhos", force: :cascade do |t|

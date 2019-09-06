@@ -40,13 +40,13 @@
       <div class='row mr-2 no-gutters'>
         <%= label_tag :valor_unitario, 'Valor unitário:', class: 'my-auto mr-2' %>
 
-        <%= text_field_tag :valor_unitario, number_to_currency(item.produto.preco), id: "valorUnitario#{item.id}", class: 'form-control-plaintext ml-2 w-6-rem', readonly: true %>
+        <%= text_field_tag :valor_unitario, number_to_currency(item.produto.preco_com_desconto), id: "valorUnitario#{item.id}", class: 'form-control-plaintext ml-2 w-6-rem', readonly: true %>
       </div>
 
       <div class='row no-gutters'>
         <%= label_tag :valor_total, 'Valor total:', class: 'my-auto mr-2' %>
 
-        <%= text_field_tag :valor_total, number_to_currency(item.produto.preco * item.quantidade), id: "valorTotal#{item.id}", class: 'form-control-plaintext w-6-rem', readonly: true %>
+        <%= text_field_tag :valor_total, number_to_currency(item.produto.preco_com_desconto * item.quantidade), id: "valorTotal#{item.id}", class: 'form-control-plaintext w-6-rem', readonly: true %>
       </div>
     </div>
   </div>

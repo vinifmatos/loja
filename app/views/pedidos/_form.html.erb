@@ -1,0 +1,33 @@
+<%= form_with(model: [pedido], local: true, class: 'px-3 py-2') do |form| %>
+  <div class='card'>
+    <div class='card-header'>
+      <%= t '.detalhes' %>
+    </div>
+    <div class='card-body'>
+    </div>
+  </div>
+
+  <div class='card mt-2'>
+    <div class='card-header'>
+      <%= t '.endereco' %>
+    </div>
+    <div class='card-body'>
+      <div class='endereco px-2'>
+        <%= fields_for :endereco_cliente do |endereco| %>
+          <%= render 'campos_endereco', endereco: endereco %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit t('acoes.salvar'), class: 'btn btn-primary' %>
+    <%= link_to t('acoes.cancelar'), action_name == 'edit' ? pedido_path(pedido) : pedidos_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<script>
+  $(document).on('turbolinks:load', function(){
+    $(":input").inputmask();
+  });
+</script>

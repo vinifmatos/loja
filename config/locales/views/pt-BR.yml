@@ -5,7 +5,7 @@ pt-BR:
     editar: Editar %{model}
     excluir: Excluir %{model}
     voltar: Voltar
-    salvar: Salvar %{model}
+    salvar: Salvar
     cancelar: Cancelar
     encerrar: Encerrar
     publicar: Publicar
