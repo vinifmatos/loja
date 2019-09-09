@@ -10,3 +10,29 @@
 .endereco-numero {
   width: 5rem;
 }
+
+.endereco.list-item {
+  margin-bottom: 0.25rem;
+  list-style-type: none;
+  cursor: pointer;
+  user-select: none;
+  flex-direction: row;
+  display: flex;
+}
+
+.endereco.list-item .dados {
+  padding: 0 0.5rem;
+}
+
+.endereco.list-item.selecionado {
+  border: 2px solid #007bff;
+}
+
+li:last-child.endereco.endereco-card {
+  margin-bottom: 0;
+}
+
+ul.enderecos {
+  padding-left: 0;
+  margin-bottom: 0;
+}

@@ -8,4 +8,5 @@ class Cliente < ApplicationRecord
   
   has_many :carrinhos
   has_many :pedidos, through: :carrinhos
+  has_many :enderecos, foreign_key: :cliente_id, class_name: 'EnderecoCliente', inverse_of: :cliente
 end

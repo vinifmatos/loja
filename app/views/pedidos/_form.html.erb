@@ -1,9 +1,10 @@
-<%= form_with(model: [pedido], local: true, class: 'px-3 py-2') do |form| %>
+<%= form_with(model: pedido, local: true, class: 'px-3 py-2') do |form| %>
   <div class='card'>
     <div class='card-header'>
       <%= t '.detalhes' %>
     </div>
     <div class='card-body'>
+      Valor do pedido: <%= number_to_currency pedido.valor %>
     </div>
   </div>
 
@@ -11,12 +12,21 @@
     <div class='card-header'>
       <%= t '.endereco' %>
     </div>
-    <div class='card-body'>
-      <div class='endereco px-2'>
-        <%= fields_for :endereco_cliente do |endereco| %>
-          <%= render 'campos_endereco', endereco: endereco %>
-        <% end %>
-      </div>
+    <div class='card-body p-2'>
+      <% if current_cliente.enderecos.count.positive? %>
+        <%= form.hidden_field :endereco_cliente_id %>
+        <ul class='enderecos'>
+          <% current_cliente.enderecos.each do |endereco| %>
+            <%= render 'endereco', endereco: endereco %>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class='endereco px-2'>
+          <%= fields_for :endereco_cliente do |endereco| %>
+            <%= render 'campos_novo_endereco', endereco: endereco %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 
@@ -29,5 +39,11 @@
 <script>
   $(document).on('turbolinks:load', function(){
     $(":input").inputmask();
+
+    $(".endereco.list-item").click(function () {
+      $($(this).parent('ul')).children('.endereco.list-item').removeClass('selecionado');
+      $(this).addClass('selecionado');
+      $('#pedido_endereco_cliente_id').val($(this).data('id'))
+    });
   });
 </script>

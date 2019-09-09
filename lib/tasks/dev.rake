@@ -21,5 +21,7 @@ namespace :dev do
 
     c = Cliente.create email: 'teste@teste.com', password: '123456', password_confirmation: '123456'
     c.confirm
+
+    FactoryBot.create_list(:endereco_cliente, 3, cliente: c)
   end
 end

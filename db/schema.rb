@@ -65,12 +65,10 @@ ActiveRecord::Schema.define(version: 2019_09_06_135128) do
     t.string "bairro"
     t.string "cidade"
     t.string "complemento"
-    t.integer "pedidos_id"
     t.integer "cliente_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cliente_id"], name: "index_endereco_clientes_on_cliente_id"
-    t.index ["pedidos_id"], name: "index_endereco_clientes_on_pedidos_id"
   end
 
   create_table "imagem_produtos", force: :cascade do |t|

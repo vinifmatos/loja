@@ -1,0 +1,10 @@
+<%= tag.li class: 'endereco list-item', data: { id: endereco.id} do %>
+  <div class='dados'>
+    <%= endereco.cep %><br>
+    <%= "#{endereco.logradouro}, #{endereco.numero}" %><br>
+    <%= "#{endereco.bairro}, #{endereco.cidade}" %><br>
+    <%= endereco.complemento %>
+  </div>
+  <div class='icone'>
+  </div>
+<% end %>

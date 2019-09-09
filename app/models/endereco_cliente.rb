@@ -1,3 +1,3 @@
 class EnderecoCliente < ApplicationRecord
-  belongs_to :pedido
+  belongs_to :cliente
 end
