@@ -1,4 +1,4 @@
-<%= form_with(model: pedido, local: true, class: 'px-3 py-2') do |form| %>
+<%= form_with(model: pedido, local: true, class: 'px-3 py-2', id: 'form_pedido') do |form| %>
   <div class='card'>
     <div class='card-header'>
       <%= t '.detalhes' %>
@@ -12,21 +12,19 @@
     <div class='card-header'>
       <%= t '.endereco' %>
     </div>
-    <div class='card-body p-2'>
-      <% if current_cliente.enderecos.count.positive? %>
-        <%= form.hidden_field :endereco_cliente_id %>
+
+    <div class='card-body p-2 <%= 'd-none' unless current_cliente.enderecos.count.positive? %>' id='body_card_enderecos'>
+      <%= form.hidden_field :endereco_cliente_id, disabled: !current_cliente.enderecos.count.positive? %>
         <ul class='enderecos'>
           <% current_cliente.enderecos.each do |endereco| %>
             <%= render 'endereco', endereco: endereco %>
           <% end %>
         </ul>
-      <% else %>
-        <div class='endereco px-2'>
-          <%= fields_for :endereco_cliente do |endereco| %>
-            <%= render 'campos_novo_endereco', endereco: endereco %>
-          <% end %>
-        </div>
-      <% end %>
+        <%= link_to 'Novo endereço', nil, id: 'link_novo_endereco' %>
+    </div>
+
+    <div class='card-body p-2 <%= 'd-none' if current_cliente.enderecos.count.positive? %>' id='body_card_novo_endereco'>
+      <%= render 'campos_novo_endereco', f: form, disabled: current_cliente.enderecos.count.positive? %>
     </div>
   </div>
 
@@ -44,6 +42,24 @@
       $($(this).parent('ul')).children('.endereco.list-item').removeClass('selecionado');
       $(this).addClass('selecionado');
       $('#pedido_endereco_cliente_id').val($(this).data('id'))
+      $(this).children('.icone').css('background-color', '#007bff')
+      $(this).children('.icone').html('')
     });
+
+    $('#link_novo_endereco').click(function (e) {
+      e.preventDefault();
+      $('#body_card_enderecos').toggleClass('d-none')
+      $('#body_card_novo_endereco').toggleClass('d-none')
+      $('#pedido_endereco_cliente_id').attr('disabled', 'disabled')
+      $('#body_card_novo_endereco :input').removeAttr('disabled')
+    })
+
+    $('#cancelar-novo-endereco').click(function (e) {
+      e.preventDefault();
+      $('#body_card_enderecos').toggleClass('d-none')
+      $('#body_card_novo_endereco').toggleClass('d-none')
+      $('#pedido_endereco_cliente_id').removeAttr('disabled')
+      $('#body_card_novo_endereco :input').attr('disabled', 'disabled')
+    })
   });
 </script>

@@ -9,7 +9,9 @@ class PedidosController < ApplicationController
 
   def new
     @pedido = Pedido.new carrinho: get_carrinho
-    
+  end
+
+  def create
   end
 
   private

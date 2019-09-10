@@ -29,5 +29,5 @@ Rails.application.routes.draw do
     post 'quantidade/', to: 'carrinhos#atualiza_quantidade', as: 'atualiza_quantidade_carrinho'
   end
 
-  resources :pedidos, only: [:index, :show, :new]
+  resources :pedidos, only: [:index, :show, :new, :create]
 end
