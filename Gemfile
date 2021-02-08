@@ -48,7 +48,7 @@ gem 'font_awesome5_rails'
 
 gem 'chartjs-ror'
 
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 
 gem "mini_magick"
 
